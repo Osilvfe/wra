@@ -20,6 +20,9 @@ rm -rf f2fs-tools-master
 busybox unzip f2fs-tools-master.zip
 
 cd f2fs-tools-master
+# Fix: conflict with stdbool.h
+sed -i 's/typedef u8.*bool;/\/\/ typedef u8 bool;/' include/f2fs_fs.h
+
 ./autogen.sh
 
 echo "mkfs_f2fs_LDFLAGS = -all-static" >>mkfs/Makefile.am
