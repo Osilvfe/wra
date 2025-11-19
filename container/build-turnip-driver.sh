@@ -11,6 +11,14 @@ source() {
 build() {
     cd mesa || exit 1
     git pull
+    
+    # Fix: missing headers causing implicit declaration errors
+    # We inject include directives at the top of the file
+    if [ -f src/loader/loader_wayland_helper.c ]; then
+        echo "Patching src/loader/loader_wayland_helper.c..."
+        sed -i '1i #include <time.h>\n#include "util/timespec.h"' src/loader/loader_wayland_helper.c
+    fi
+
     mkdir -p build
     cd build || exit 1
     command -v meson &> /dev/null || apt-get install meson ninja-build -y
