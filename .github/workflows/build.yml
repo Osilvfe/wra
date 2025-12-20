@@ -22,7 +22,7 @@ jobs:
         run:  |
               mkdir -p build
               wget https://github.com/TrebleDroid/treble_experimentations/releases/download/ci-20250617/system-td-arm64-vanilla.img.xz
-              xz -d system-td-arm64-ab-vanilla.img.xz
+              xz -d system-td-arm64-vanilla.img.xz
               mv system-td-arm64-ab-vanilla.img build/gsi.img
 
       - name: setup permissions
